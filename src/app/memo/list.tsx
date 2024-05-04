@@ -1,14 +1,23 @@
 import { View, StyleSheet } from 'react-native'
+import { router, useNavigation } from 'expo-router'
+import { useEffect } from 'react'
 import Icon from '../../components/Icon'
 import MemoListItem from '../../components/MemoListItem'
 import CircleButton from '../../components/CircleButton'
-import { router } from 'expo-router'
+import LogOutButton from '../../components/LogOutButton'
 
 const handlePress = (): void => {
   router.push('/memo/create')
 }
 
 const List = (): JSX.Element => {
+  const navigation = useNavigation()
+  useEffect(() => {
+    // 画面が表示された時、1度だけ実行
+    navigation.setOptions({
+      headerRight: () => { return <LogOutButton /> }
+    })
+  }, [])
   return (
     <View style={styles.container}>
       <View>
