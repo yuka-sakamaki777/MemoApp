@@ -2,9 +2,11 @@ import { View, StyleSheet } from 'react-native'
 import { router, useNavigation } from 'expo-router'
 import { useEffect } from 'react'
 import Icon from '../../components/Icon'
+import { collection, onSnapshot, query, orderBy } from 'firebase/firestore'
 import MemoListItem from '../../components/MemoListItem'
 import CircleButton from '../../components/CircleButton'
 import LogOutButton from '../../components/LogOutButton'
+import { db, auth } from '../../config'
 
 const handlePress = (): void => {
   router.push('/memo/create')
@@ -17,6 +19,20 @@ const List = (): JSX.Element => {
     navigation.setOptions({
       headerRight: () => { return <LogOutButton /> }
     })
+  }, [])
+  useEffect(() => {
+    // memoデータの監視用
+    if (auth.currentUser === null) return
+    const ref = collection(db, `users/${auth.currentUser.uid}/memos`)
+    const q = query(ref, orderBy('updatedAt', 'desc'))
+    // onSnapshotの戻り値をunsubscribeにする
+    // アンマウント時に監視をキャンセルする
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      snapshot.forEach((doc) => {
+        console.log('ss', doc.data())
+      })
+    })
+    return unsubscribe
   }, [])
   return (
     <View style={styles.container}>
