@@ -1,7 +1,8 @@
 import { useState } from 'react'
-import { View, TextInput, StyleSheet, KeyboardAvoidingView } from 'react-native'
+import { View, TextInput, StyleSheet } from 'react-native'
 import Icon from '../../components/Icon'
 import CircleButton from '../../components/CircleButton'
+import KeyboardAvoidingView from '../../components/KeyBoardAvoidingView'
 import { router } from 'expo-router'
 import { collection, addDoc, Timestamp } from 'firebase/firestore'
 import { db, auth } from '../../config'
@@ -25,8 +26,8 @@ const handlePress = (bodyText: string): void => {
 const Create = (): JSX.Element => {
   const [bodyText, setBodyText] = useState('')
   return (
-    // CircleButtonを考慮するための設定
-    <KeyboardAvoidingView behavior='height' style={styles.container}>
+    // キーボード表示時のCircleButtonを考慮するための設定
+    <KeyboardAvoidingView style={styles.container}>
       <View style={styles.inputContainer}>
         {/* iOSでは複数行として認識させるためmultilineを使う */}
         <TextInput
@@ -34,6 +35,7 @@ const Create = (): JSX.Element => {
           style={styles.input}
           value={bodyText}
           onChangeText={(text) => { setBodyText(text) }}
+          autoFocus
         />
       </View>
       <CircleButton onPress={() => { handlePress(bodyText) }}>
