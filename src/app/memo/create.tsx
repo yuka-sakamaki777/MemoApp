@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { View, TextInput, StyleSheet } from 'react-native'
+import { View, TextInput, StyleSheet, Alert } from 'react-native'
 import Icon from '../../components/Icon'
 import CircleButton from '../../components/CircleButton'
 import KeyboardAvoidingView from '../../components/KeyBoardAvoidingView'
@@ -15,11 +15,10 @@ const handlePress = (bodyText: string): void => {
     updatedAt: Timestamp.fromDate(new Date())
   })
     .then((docRef) => {
-      console.log(docRef)
       router.back()
     })
     .catch((error) => {
-      console.log(error)
+      Alert.alert(error)
     })
 }
 
