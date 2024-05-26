@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "MemoApp",
-    "slug": "MemoApp",
+    "name": "StudySausageMemoApp",
+    "slug": "StudySausageMemoApp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -9,19 +9,24 @@
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
-      "resizeMode": "contain",
+      "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
     "assetBundlePatterns": [
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": false,
+      "bundleIdentifier": "jp.studysausage.memoapp",
+      "buildNumber": "1.0.0"
     },
     "android": {
+      "package": "jp.studysausage.memoapp",
+      "versionCode": 1,
+      "permissions": [],
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./assets/icon_adaptive_foreground.png",
+        "backgroundColor": "./assets/icon_adaptive_background.png"
       }
     },
     "web": {
